@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>All Users</title>
+    <style>
+        .styled_input{
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            background-color: rgba(220, 0, 0, 1);
+        }
+
+        #update_input {
+            background-color: rgb(5, 136, 0);
+        }
+
+        .inline {
+            display: inline-block;
+        }
+
+        input[type=button] {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=submit] {
+            /*background-color: #04AA6D;*/
+            border: none;
+            color: white;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 350px;
+        }
+
+        th {
+            background: #ccc;
+            text-align: left;
+        }
+
+        td, th {
+            border: 1px solid #058800;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+<h2>All Users</h2>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+    <tbody th:each="user : ${users}">
+    <tr>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.age}"></td>
+        <td>
+            <form th:method="patch" th:action="@{/update/{id}(id=${user.id})}" class="inline">
+                <input type="submit" value="Update" class="styled_input" id="update_input"/>
+            </form>
+            <form th:method="delete" th:action="@{/delete/{id}(id=${user.id})}" class="inline">
+                <input type="submit" value="Delete" class="styled_input" id="delete_input"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="Add" onclick="window.location.href = 'add'"/>
+</body>
+</html>
