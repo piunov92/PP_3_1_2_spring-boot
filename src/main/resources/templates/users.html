@@ -5,7 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>All Users</title>
     <style>
-        .styled_input{
+        .wrapper {
+            display: flex;
+        }
+
+        .block {
+            display: inline-block;
+            border: 1px solid blue;
+            margin: 2px;
+        }
+
+        .styled_input {
             border: 0;
             line-height: 2.5;
             padding: 0 20px;
@@ -18,10 +28,6 @@
 
         #update_input {
             background-color: rgb(5, 136, 0);
-        }
-
-        .inline {
-            display: inline-block;
         }
 
         input[type=button] {
@@ -75,12 +81,18 @@
         <td th:text="${user.surname}"></td>
         <td th:text="${user.age}"></td>
         <td>
-            <form th:method="patch" th:action="@{/update/{id}(id=${user.id})}" class="inline">
-                <input type="submit" value="Update" class="styled_input" id="update_input"/>
-            </form>
-            <form th:method="delete" th:action="@{/delete/{id}(id=${user.id})}" class="inline">
-                <input type="submit" value="Delete" class="styled_input" id="delete_input"/>
-            </form>
+            <div class="wrapper">
+                <div class="block">
+                    <form th:method="patch" th:action="@{/update/{id}(id=${user.id})}">
+                        <input type="submit" value="Update" class="styled_input" id="update_input"/>
+                    </form>
+                </div>
+                <div class="block">
+                    <form th:method="delete" th:action="@{/delete/{id}(id=${user.id})}">
+                        <input type="submit" value="Delete" class="styled_input" id="delete_input"/>
+                    </form>
+                </div>
+            </div>
         </td>
     </tr>
     </tbody>

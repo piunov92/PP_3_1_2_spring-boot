@@ -26,19 +26,23 @@ public class UsersController {
     @GetMapping("/add")
     public String addNewUser(Model model) {
         model.addAttribute("user", new User());
-        return "formUser";
+        return "createAndUpdateUser";
     }
 
-    @RequestMapping("/saveUser")
+    @PostMapping("/create-and-update-user")
     public String userSubmit(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+        if (userService.getUserById(user.getId()) == null) {
+            userService.saveUser(user);
+        } else {
+            userService.updateUser(user);
+        }
         return "redirect:/";
     }
 
     @PatchMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "formUser";
+        return "createAndUpdateUser";
     }
 
     @DeleteMapping("/delete/{id}")

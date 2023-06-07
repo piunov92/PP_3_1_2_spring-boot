@@ -19,14 +19,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        User existingUser = getUserById(user.getId());
-        if(existingUser == null) {
+//        User existingUser = getUserById(user.getId());
+//        if(existingUser == null) {
             entityManager.persist(user);
-        } else {
-            existingUser.setName(user.getName());
-            existingUser.setSurname(user.getSurname());
-            existingUser.setAge(user.getAge());
-        }
+//        } else {
+//            existingUser.setName(user.getName());
+//            existingUser.setSurname(user.getSurname());
+//            existingUser.setAge(user.getAge());
+//        }
     }
 
     @Override
@@ -37,6 +37,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(long id) {
         entityManager.remove(getUserById(id));
+        entityManager.flush();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User selectUser = getUserById(user.getId());
+        selectUser.setName(user.getName());
+        selectUser.setSurname(user.getSurname());
+        selectUser.setAge(user.getAge());
         entityManager.flush();
     }
 }

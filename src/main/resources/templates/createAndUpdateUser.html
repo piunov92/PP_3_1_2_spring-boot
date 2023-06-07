@@ -3,11 +3,11 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Form</title>
+    <title>Create And Update Form</title>
 </head>
 <body>
 <h2>User</h2>
-<form action="#" th:action="@{/saveUser}" th:object="${user}" th:method="post">
+<form action="#" th:action="@{/create-and-update-user}" th:object="${user}" th:method="post">
     <input type="hidden" th:field="*{id}">
     <p><label for="name">Name:</label>
         <input type="text" th:field="*{name}" id="name" style=position:absolute;left:5%;/></p>
