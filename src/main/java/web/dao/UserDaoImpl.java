@@ -19,14 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-//        User existingUser = getUserById(user.getId());
-//        if(existingUser == null) {
             entityManager.persist(user);
-//        } else {
-//            existingUser.setName(user.getName());
-//            existingUser.setSurname(user.getSurname());
-//            existingUser.setAge(user.getAge());
-//        }
     }
 
     @Override
